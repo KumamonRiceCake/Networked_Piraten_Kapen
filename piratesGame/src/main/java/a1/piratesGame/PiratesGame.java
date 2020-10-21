@@ -16,6 +16,7 @@ public class PiratesGame implements Serializable {
     private Player[] players = new Player[3];
     private Player player;
     private int entryNumber = 0;
+    public boolean roundOnGoing = false;
     private static final String[] diePattern = {"skull", "parrot", "monkey", "sword", "gold", "diamond"};
 
     /**
@@ -121,6 +122,7 @@ public class PiratesGame implements Serializable {
                 }
             }
             System.out.println("Dead with 3 skulls. End of the turn.");
+            roundOnGoing = false;
             return true;
         }
         return false;
@@ -333,16 +335,17 @@ public class PiratesGame implements Serializable {
      * @param name - player name with the card
      */
     public void scoreTreasureChest(Player p) {
+        String[] result = new String[8];
         String[] chest = new String[8];
         int score = 0;
-        int i = 0;
-        if (p.getTreasureChest() != null) {
-            for (String d : p.getTreasureChest()) {
-                chest[i] = d;
-                i++;
-            }
-        }
-        score = scoreSequence(chest) + scoreDiamondsAndGolds(chest) + scoreFullChest(chest);
+    	if (p.getTreasureChest() != null)
+            chest = p.getTreasureChest();
+
+        for (String s : chest)
+        	result[Integer.parseInt(s)] = p.getHeldDie()[Integer.parseInt(s)];
+        
+        
+        score = scoreSequence(result) + scoreDiamondsAndGolds(result) + scoreFullChest(result);
         p.setScore(p.getScore() + score);
     }
     
@@ -554,13 +557,18 @@ public class PiratesGame implements Serializable {
     }
     
     public void userPrompt() {
-        // user prompt
         System.out.println("Select an action: ");
         System.out.println("(1) Hold dice and reroll");
         System.out.println("(2) Roll all except skull");
         System.out.println("(3) Score this round");
         if (player.getFortune().equals("treasure chest"))
             System.out.println("(4) Put dice in treasure chest");
+    }
+    
+    public void skullIslandPrompt() {
+        System.out.println();
+        System.out.println("\nSKULL ISLAND!");
+        System.out.println("\nEnter anything to throw dice!");
     }
     
     public String[] holdAndReroll(String[] roll, String[] hold) {
@@ -582,14 +590,13 @@ public class PiratesGame implements Serializable {
 
         String[] roll = new String[8];
         String[] hold = new String[8];
-        boolean roundOnGoing = true;
+        roundOnGoing = true;
         for (int i=0; i<8; i++)
             roll[i] = rollDie();
         player.nextRound();
         player.resetHeldDie();
         printDieRoll(roll, player.getFortune());
-        if (isDead(roll))
-        	roundOnGoing = false;
+        isDead(roll);
         boolean isSorceress = false;
         if (player.getFortune().equals("sorceress"))
         	isSorceress = true;
@@ -607,9 +614,7 @@ public class PiratesGame implements Serializable {
 
                 // rolling for skull island
                 roundOnGoing = false;
-                System.out.println();
-                System.out.println("\nSKULL ISLAND!");
-                System.out.println("\nEnter anything to throw dice!");
+                skullIslandPrompt();
                 String skullThrow = scanner.nextLine();
                 boolean loop = true;
                 int numSkull = 0;

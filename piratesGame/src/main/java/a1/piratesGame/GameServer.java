@@ -65,6 +65,10 @@ public class GameServer implements Serializable {
             System.out.println("Could not connect 3 players");
         }
     }
+    
+    public int deductionPt(int numSkull) {
+    	return numSkull * 100;
+    }
 
     /**
      * Game loop from server side
@@ -93,8 +97,8 @@ public class GameServer implements Serializable {
                 int p0Receive = playerServer[0].receiveScores();
                 if (p0Receive < 0 && p0Receive > -10) {
                     System.out.println("Skull Island: Player 1 deducts " + (p0Receive * 100) + " from other players");
-                    p1Deduct = p0Receive * 100;
-                    p2Deduct = p0Receive * 100;
+                    p1Deduct = deductionPt(p0Receive);
+                    p2Deduct = deductionPt(p0Receive);
                     if (players[1].getScore() < p1Deduct)
                     	p1Deduct = players[1].getScore();
                     if (players[2].getScore() < p2Deduct)
@@ -116,8 +120,8 @@ public class GameServer implements Serializable {
                 int p1Receive = playerServer[1].receiveScores();
                 if (p1Receive < 0 && p1Receive > -10) {
                     System.out.println("Skull Island: Player 2 deducts " + (p1Receive * 100) + " from other players");
-                    p0Deduct = p1Receive * 100;
-                    p2Deduct = p1Receive * 100;
+                    p0Deduct = deductionPt(p1Receive);
+                    p2Deduct = deductionPt(p1Receive);
                     if (players[0].getScore() < p0Deduct)
                     	p0Deduct = players[0].getScore();
                     if (players[2].getScore() < p2Deduct)
@@ -139,8 +143,8 @@ public class GameServer implements Serializable {
                 int p2Receive = playerServer[2].receiveScores();
                 if (p2Receive < 0 && p2Receive > -20) {
                     System.out.println("Skull Island: Player 3 deducts " + (p2Receive * 100) + " from other players");
-                    p0Deduct = p2Receive * 100;
-                    p1Deduct = p2Receive * 100;
+                    p0Deduct = deductionPt(p2Receive);
+                    p1Deduct = deductionPt(p2Receive);
                     if (players[0].getScore() < p0Deduct)
                     	p0Deduct = players[0].getScore();
                     if (players[1].getScore() < p1Deduct)

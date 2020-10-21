@@ -6,9 +6,19 @@ import cucumber.api.java.en.When;
 import junit.framework.TestCase;
 
 public class SorceressScoringTest extends TestCase {
-	PiratesGame game;
-
+	private PiratesGame game;
+	
 	// Row 70
+	@Given("The game is in progress.")
+	public void the_game_is_in_progress() {
+		game = new PiratesGame();
+	}
+
+	@When("Player {string} plays the game.")
+	public void player_with_name_plays_the_game(String string) {
+		game.setPlayer(new Player(string));
+	}
+
 	@When("Player draws sorceress FC")
 	public void player_draws_sorceress_FC() {
 		game.getPlayer().setFortune("sorceress");
@@ -21,6 +31,11 @@ public class SorceressScoringTest extends TestCase {
 	    game.printDieRoll(game.getPlayer().getHeldDie(), game.getPlayer().getFortune());
 	}
 
+	@When("Player sees action menu and enters menu option {int}.")
+	public void player_sees_action_menu_and_enters_menu_option(Integer int1) {
+		game.userPrompt();
+	}
+	
 	@When("Player holds four swords and two coins and rerolls")
 	public void player_holds_four_swords_and_two_coins_and_rerolls() {
 		String[] hold = new String[] {"2", "3", "4", "5", "6", "7"};

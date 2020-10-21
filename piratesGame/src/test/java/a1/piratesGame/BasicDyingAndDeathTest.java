@@ -35,6 +35,11 @@ public class BasicDyingAndDeathTest extends TestCase {
 	public void player_dies_with_three_skulls_and_sees(String string) {
 		assertTrue(game.isDead(game.getPlayer().getHeldDie()));
 	}
+	
+	@Then("Player finishes the round")
+	public void player_finishes_the_round() {
+		assertFalse(game.roundOnGoing);
+	}
 
 	@Then("Player scores none and closes connection")
 	public void player_scores_none_and_closes_connection() {

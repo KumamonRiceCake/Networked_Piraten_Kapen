@@ -6,11 +6,22 @@ import cucumber.api.java.en.When;
 import junit.framework.TestCase;
 
 public class MonkeyBusinessScoringTest extends TestCase {
-	PiratesGame game;
+	private PiratesGame game;
+	
+	// Row 44
+	@Given("The game is in progress..")
+	public void the_game_is_in_progress() {
+		game = new PiratesGame();
+	}
+
+	@When("Player with name {string} plays the game..")
+	public void player_with_name_plays_the_game(String string) {
+		game.setPlayer(new Player(string));
+	}
 
 	// Row 75
-	@When("Player draws monkey business FC")
-	public void player_draws_monkey_business_FC() {
+	@When("Player draws monkey business fortune card")
+	public void player_draws_monkey_business_fortune_card() {
 		game.getPlayer().setFortune("monkey business");
 	}
 
@@ -20,7 +31,19 @@ public class MonkeyBusinessScoringTest extends TestCase {
 	    game.getPlayer().setFinalRoll(roll);
 	    game.printDieRoll(game.getPlayer().getHeldDie(), game.getPlayer().getFortune());
 	}
+	
+	@When("Player sees action menu and enters menu option {int}..")
+	public void player_sees_action_menu_and_enters_menu_option(Integer int1) {
+		game.userPrompt();
+	}
 
+	@Then("Player scores {int} and closes connection")
+	public void player_scores_and_closes_connection(Integer int1) {
+		game.scoreForRound(game.getPlayer());
+		assertTrue(int1.equals(game.getPlayer().getScore()));
+		game = null;
+	}
+	
 	// Row 76
 	@When("Player rolls die with two coins, two parrots, two monkeys and two swords")
 	public void player_rolls_die_with_two_coins_two_parrots_two_monkeys_and_two_swords() {

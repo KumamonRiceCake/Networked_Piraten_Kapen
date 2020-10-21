@@ -1,0 +1,53 @@
+@ Level 1b
+Feature: Advanced scoring
+  Player should be able to roll die and score under complicated situations - full chest
+
+  @ Row 91
+  Scenario: 3 monkeys, 3 swords, 1 diamond, 1 parrot FC: coin   => SC 400  (ie no bonus)
+    Given The game is in progress....
+    When Player with name "Kim" plays the game....
+    When Player draws coin FC.
+    When Player rolls die with three monkeys, three swords, one diamond and one parrot
+    When Player sees action menu and enters menu option 3....
+    Then Player scores 400 and closes connection..
+  
+  @ Row 92
+  Scenario: 3 monkeys, 3 swords, 2 coins FC: captain   => SC (100+100+200+500)*2 =  1800
+    Given The game is in progress....
+    When Player with name "Kim" plays the game....
+    When Player draws captain FC.
+    When Player rolls die with three monkeys, three swords and two coins
+    When Player sees action menu and enters menu option 3....
+    Then Player scores 1800 and closes connection..
+  
+  @ Row 93
+  Scenario: 3 monkeys, 4 swords, 1 diamond, FC: coin   => SC 1000  (ie 100++200+100+100+bonus)
+    Given The game is in progress....
+    When Player with name "Kim" plays the game....
+    When Player draws coin FC.
+    When Player rolls die with three monkeys, four swords and one diamond
+    When Player sees action menu and enters menu option 3....
+    Then Player scores 1000 and closes connection..
+  
+  @ Row 94
+  Scenario: FC: 2 sword sea battle, first  roll:  4 monkeys, 1 sword, 2 parrots and a coin
+  then reroll 2 parrots and get coin and 2nd sword
+  score is: 200 (coins) + 200 (monkeys) + 300 (swords of battle) + 500 (full chest) = 1200
+    Given The game is in progress....
+    When Player with name "Kim" plays the game....
+    When Player draws two sword sea battle FC.
+    When Player rolls die with four monkeys, one sword, two parrots and one coin
+    When Player sees action menu and enters menu option 1....
+    When Player holds four monkeys, one sword and one coin and rerolls one coin and one sword
+    When Player sees action menu and enters menu option 3....
+    When Player sees "Battle win, +300 pts" message
+    Then Player scores 1200 and closes connection..
+
+  @ Row 97
+  Scenario: FC: monkey business and RTS: 2 monkeys, 1 parrot, 2 coins, 3 diamonds   SC 1200 (bonus)
+    Given The game is in progress....
+    When Player with name "Kim" plays the game....
+    When Player draws monkey business FC.
+    When Player rolls die with two monkeys, one parrot, two coins and three diamonds
+    When Player sees action menu and enters menu option 3....
+    Then Player scores 1200 and closes connection..

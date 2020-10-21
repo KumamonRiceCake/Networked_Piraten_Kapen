@@ -37,7 +37,9 @@ public class Player implements Serializable {
      * @param score
      */
     public void setScore(int score) {
-        this.score = score;
+    	this.score = score;
+    	if (score < 0)
+    		this.score = 0;
     }
     
     /**

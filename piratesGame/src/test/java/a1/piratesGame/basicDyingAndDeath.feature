@@ -9,6 +9,7 @@ Feature: Basic dying and scoring
     When Player draws coin FC
     When Player rolls die with three skulls and five diamonds
     Then Player dies with three skulls and sees "Dead with 3 skulls. End of the turn."
+    Then Player finishes the round
     Then Player scores none and closes connection
 
   @ Row 39
@@ -20,6 +21,7 @@ Feature: Basic dying and scoring
     When Player sees action menu and enters menu option 1
     When Player holds four parrots and rerolls three swords and gets two skulls and one sword
     Then Player dies with three skulls and sees "Dead with 3 skulls. End of the turn."
+    Then Player finishes the round
     Then Player scores none and closes connection
 
   @ Row 40
@@ -31,6 +33,7 @@ Feature: Basic dying and scoring
     When Player sees action menu and enters menu option 1
     When Player holds four parrots and rerolls two swords and gets one skull and one sword
     Then Player dies with three skulls and sees "Dead with 3 skulls. End of the turn."
+    Then Player finishes the round
     Then Player scores none and closes connection
     
   @ Row 41
@@ -45,4 +48,5 @@ Feature: Basic dying and scoring
     When Player sees action menu and enters menu option 1
     When Player holds four parrots and rerolls two monkeys and gets one skull and one monkey
     Then Player dies with three skulls and sees "Dead with 3 skulls. End of the turn."
+    Then Player finishes the round
     Then Player scores none and closes connection
