@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -198,7 +197,6 @@ public class PiratesGame implements Serializable {
                 break;
             }
         }
-        System.out.println("Score for this sequence: " + score);
         return score;
     }
     
@@ -213,7 +211,6 @@ public class PiratesGame implements Serializable {
             if (pattern != null && (pattern.equals("gold") || pattern.equals("diamond")))
                 score += 100;
         }
-        System.out.println("Score for gold and diamonds: " + score);
         return score;
     }
     
@@ -347,6 +344,7 @@ public class PiratesGame implements Serializable {
         
         score = scoreSequence(result) + scoreDiamondsAndGolds(result) + scoreFullChest(result);
         p.setScore(p.getScore() + score);
+        System.out.println("Score for this round: " + score);
     }
     
     /**
@@ -359,6 +357,7 @@ public class PiratesGame implements Serializable {
             score = scoreSequence(p.getHeldDie()) + scoreDiamondsAndGolds(p.getHeldDie()) + scoreFullChest(p.getHeldDie());
             p.setScore(p.getScore() + score * 2);
         }
+        System.out.println("Score for this round: " + score * 2);
     }
 
     /**
@@ -429,6 +428,7 @@ public class PiratesGame implements Serializable {
             newRoll[9] = "skull";
         }
         int score = scoreSequence(newRoll) + scoreDiamondsAndGolds(newRoll) + scoreFullChest(roll);
+        System.out.println("Score for this round: " + score);
         return score;
     }
 
@@ -447,6 +447,7 @@ public class PiratesGame implements Serializable {
         }
         score = scoreSequence(roll) + scoreDiamondsAndGolds(roll) + scoreFullChest(roll);
         p.setScore(p.getScore() + score);
+        System.out.println("Score for this round: " + score);
     }
 
     /**
@@ -469,6 +470,7 @@ public class PiratesGame implements Serializable {
                 score += 300;
                 p.setScore(p.getScore() + score);
                 System.out.println("Battle win, +300 pts");
+                System.out.println("Score for this round: " + score);
             }
             else {
                 p.setScore(p.getScore() - 300);
@@ -480,6 +482,7 @@ public class PiratesGame implements Serializable {
                 score += 500;
                 p.setScore(p.getScore() + score);
                 System.out.println("Battle win, +500 pts");
+                System.out.println("Score for this round: " + score);
             }
             else {
                 p.setScore(p.getScore() - 500);
@@ -491,6 +494,7 @@ public class PiratesGame implements Serializable {
                 score += 1000;
                 p.setScore(p.getScore() + score);
                 System.out.println("Battle win, +1000 pts");
+                System.out.println("Score for this round: " + score);
             }
             else {
                 p.setScore(p.getScore() - 1000);
