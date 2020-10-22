@@ -10,9 +10,7 @@ import java.util.HashMap;
 public class MockClient implements Serializable {
     private static final long serialVersionUID = 1L;
     public PiratesGame game = new PiratesGame();
-    
     public Player[] players = new Player[3];
-
     Socket socket;
     private ObjectInputStream dIn;
     private ObjectOutputStream dOut;
@@ -127,5 +125,13 @@ public class MockClient implements Serializable {
         for (int i=0; i<8; i++)
             roll[i] = game.rollDie();
         return roll;
+    }
+    
+    public String mockWinnerDeclare() {
+    	for (Player p : players) {
+            if (p.getScore() >= 6000)
+                return ("Game over!!!\n" + p.getName() + " wins the game!");
+        }
+    	return "";
     }
 }
