@@ -1,11 +1,11 @@
 package a1.piratesGame;
 
-import cucumber.junit.Cucumber;
 import org.junit.runner.RunWith;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-//@Cucumber.Options(format= {"pretty"}, tags = {"@notskipped"})
-@Cucumber.Options(format= {"pretty"})
+@CucumberOptions()
 public class TestSuite {
 
 }

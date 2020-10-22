@@ -31,7 +31,7 @@ public class MockServer extends Thread implements Serializable {
 	@Override
 	public void run() {
         try {
-            ss = new ServerSocket(49152);
+            ss = new ServerSocket(49200);
             System.out.println("Connecting to game server");
             while (numPlayers < 3) {
                 Socket s = ss.accept();

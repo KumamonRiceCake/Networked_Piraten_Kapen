@@ -12,10 +12,6 @@ public class MockClient implements Serializable {
     public PiratesGame game = new PiratesGame();
     
     public Player[] players = new Player[3];
-    private Player player;
-    private int entryNumber = 0;
-    public boolean roundOnGoing = false;
-    private static final String[] diePattern = {"skull", "parrot", "monkey", "sword", "gold", "diamond"};
 
     Socket socket;
     private ObjectInputStream dIn;
@@ -23,7 +19,7 @@ public class MockClient implements Serializable {
 
     public MockClient() {
         try {
-            socket = new Socket("localhost", 49152);
+            socket = new Socket("localhost", 49200);
             dOut = new ObjectOutputStream(socket.getOutputStream());
             dIn = new ObjectInputStream(socket.getInputStream());
         } catch (IOException ex) {
@@ -45,7 +41,7 @@ public class MockClient implements Serializable {
      */
     public void sendPlayer() {
         try {
-            dOut.writeObject(player);
+            dOut.writeObject(game.getPlayer());
             dOut.flush();
         } catch (IOException ex) {
             System.out.println("Failed to send player");
@@ -128,7 +124,6 @@ public class MockClient implements Serializable {
 
     public String[] mockRoll() {
         String[] roll = new String[8];
-        roundOnGoing = true;
         for (int i=0; i<8; i++)
             roll[i] = game.rollDie();
         return roll;
