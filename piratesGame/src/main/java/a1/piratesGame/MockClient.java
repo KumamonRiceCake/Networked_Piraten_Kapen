@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
-import java.util.HashMap;
 
 public class MockClient implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -15,9 +14,9 @@ public class MockClient implements Serializable {
     private ObjectInputStream dIn;
     private ObjectOutputStream dOut;
 
-    public MockClient() {
+    public MockClient(int port) {
         try {
-            socket = new Socket("localhost", 49200);
+            socket = new Socket("localhost", port);
             dOut = new ObjectOutputStream(socket.getOutputStream());
             dIn = new ObjectInputStream(socket.getInputStream());
         } catch (IOException ex) {

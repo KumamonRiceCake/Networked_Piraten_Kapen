@@ -1,10 +1,10 @@
 # Level 2
-Feature: Networked game test
+Feature: Networked game test - single round
   Game should be able to run with 3 players in network
 
   # Row 125
   Scenario: game starts, each player plays a turn with scores being updated correctly for each player
-  Given the game has been started
+  Given the game has been started on port 49200
   When Round starts
   When Player 1 sees score board
 	When Player 1 sees die roll and fortune card

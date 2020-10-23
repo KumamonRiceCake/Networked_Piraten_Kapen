@@ -1,7 +1,6 @@
 package a1.piratesGame;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Player implements Serializable {
 	private static final long serialVersionUID = 1L;

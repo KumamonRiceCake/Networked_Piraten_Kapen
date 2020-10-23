@@ -15,12 +15,14 @@ public class MockServer extends Thread implements Serializable {
     Player[] players = new Player[3];
     ServerSocket ss;
     PiratesGame game = new PiratesGame();
+    int networkPort;
     
     int numPlayers;
     public int round;
 
-    public MockServer() {
+    public MockServer(int port) {
         numPlayers = 0;
+        networkPort = port;
         for (int i = 0; i < 3; i++) {
             players[i] = new Player("");
         }
@@ -30,7 +32,7 @@ public class MockServer extends Thread implements Serializable {
 	@Override
 	public void run() {
         try {
-            ss = new ServerSocket(49200);
+            ss = new ServerSocket(networkPort);
             System.out.println("Connecting to game server");
             while (numPlayers < 3) {
                 Socket s = ss.accept();
@@ -61,6 +63,15 @@ public class MockServer extends Thread implements Serializable {
 		}
 		
 		System.out.println("Closing");
+	}
+	
+	public void stop_connection() {
+		try {
+			ss.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
     
     public int deductionPt(int numSkull) {
