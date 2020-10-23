@@ -13,7 +13,6 @@ public class MockServer extends Thread implements Serializable {
     
     Server[] playerServer = new Server[3];
     Player[] players = new Player[3];
-    
     ServerSocket ss;
     PiratesGame game = new PiratesGame();
     
