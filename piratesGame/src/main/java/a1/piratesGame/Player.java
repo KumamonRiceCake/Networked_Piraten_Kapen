@@ -79,7 +79,7 @@ public class Player implements Serializable {
         }
         // skull is automatically held
         for (int i=0; i<8; i++) {
-            if (dieRoll[i].equals("skull"))
+            if (dieRoll[i] != null && dieRoll[i].equals("skull"))
                 held[i] = "skull";
         }
         for (String holdIndex : holdingSelection) {
